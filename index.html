@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PawShop — Premium Pet Products</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Varela+Round&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Varela Round', 'sans-serif'],
+            body: ['Nunito Sans', 'sans-serif'],
+          },
+          colors: {
+            primary: '#6f5170',
+            secondary: '#8f8e97',
+            cta: '#6f5170',
+            bg: '#dee2f4',
+            dark: '#2C2C2A',
+          },
+          borderRadius: {
+            clay: '20px',
+            'clay-lg': '28px',
+          },
+          boxShadow: {
+            clay: '0 4px 0 0 rgba(0,0,0,0.15), 0 8px 24px rgba(111,81,112,0.18)',
+            'clay-blue': '0 4px 0 0 rgba(0,0,0,0.15), 0 8px 24px rgba(111,81,112,0.18)',
+            'clay-sm': '0 2px 0 0 rgba(0,0,0,0.12), 0 4px 12px rgba(111,81,112,0.12)',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Nunito Sans', sans-serif; background-color: #dee2f4; color: #2C2C2A; }
+    h1, h2, h3, .font-heading { font-family: 'Varela Round', sans-serif; }
+
+    .clay-card {
+      background: #fff;
+      border: 3px solid rgba(0,0,0,0.08);
+      border-radius: 20px;
+      box-shadow: 0 4px 0 0 rgba(0,0,0,0.10), 0 8px 24px rgba(111,81,112,0.10);
+      transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+    }
+    .clay-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 0 0 rgba(0,0,0,0.10), 0 16px 36px rgba(111,81,112,0.16);
+    }
+
+    .btn-primary {
+      background: #6f5170;
+      color: #fff;
+      border: 3px solid rgba(0,0,0,0.10);
+      border-radius: 999px;
+      box-shadow: 0 4px 0 0 #4e3a50, 0 6px 16px rgba(111,81,112,0.30);
+      transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+      cursor: pointer;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 0 0 #4e3a50, 0 10px 24px rgba(111,81,112,0.35); }
+    .btn-primary:active { transform: translateY(2px); box-shadow: 0 2px 0 0 #4e3a50, 0 4px 10px rgba(111,81,112,0.20); }
+
+    .btn-cta {
+      background: #6f5170;
+      color: #fff;
+      border: 3px solid rgba(0,0,0,0.10);
+      border-radius: 999px;
+      box-shadow: 0 4px 0 0 #4e3a50, 0 6px 16px rgba(111,81,112,0.30);
+      transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+      cursor: pointer;
+    }
+    .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 0 0 #4e3a50, 0 10px 24px rgba(111,81,112,0.35); }
+    .btn-cta:active { transform: translateY(2px); box-shadow: 0 2px 0 0 #4e3a50; }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, .clay-card, .btn-primary, .btn-cta { transition: none !important; transform: none !important; }
+    }
+  </style>
+</head>
+<body class="overflow-x-hidden">
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-4 left-4 right-4 z-50 flex items-center justify-between px-6 py-3 rounded-clay clay-card bg-white/90 backdrop-blur-md" role="navigation" aria-label="Main navigation">
+    <a href="#" class="flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-primary rounded-lg" aria-label="PawShop home">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="16" fill="#6f5170"/>
+        <ellipse cx="11" cy="11" rx="3" ry="4" fill="#fff" opacity="0.9"/>
+        <ellipse cx="21" cy="11" rx="3" ry="4" fill="#fff" opacity="0.9"/>
+        <ellipse cx="9" cy="19" rx="2.5" ry="3.5" fill="#fff" opacity="0.9"/>
+        <ellipse cx="23" cy="19" rx="2.5" ry="3.5" fill="#fff" opacity="0.9"/>
+        <ellipse cx="16" cy="21" rx="5" ry="6" fill="#fff"/>
+      </svg>
+      <span class="font-heading text-xl text-dark font-bold">PawShop</span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#products" class="text-stone-600 hover:text-primary transition-colors duration-200 font-medium cursor-pointer focus-visible:ring-2 focus-visible:ring-primary rounded">Products</a>
+      <a href="#features" class="text-stone-600 hover:text-primary transition-colors duration-200 font-medium cursor-pointer focus-visible:ring-2 focus-visible:ring-primary rounded">Why Us</a>
+      <a href="#reviews" class="text-stone-600 hover:text-primary transition-colors duration-200 font-medium cursor-pointer focus-visible:ring-2 focus-visible:ring-primary rounded">Reviews</a>
+    </div>
+
+    <a href="#shop" class="btn-primary px-5 py-2 font-heading font-bold text-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary">Shop Now</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="relative pt-36 pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden" aria-labelledby="hero-heading">
+    <div class="blob w-96 h-96 bg-primary top-0 -left-20" aria-hidden="true"></div>
+    <div class="blob w-72 h-72 bg-secondary bottom-0 right-0" aria-hidden="true"></div>
+
+    <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 font-semibold text-sm px-4 py-2 rounded-full border-2 mb-6" style="background:rgba(111,81,112,0.10); color:#6f5170; border-color:rgba(111,81,112,0.25);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Trusted by 50,000+ pet owners
+        </div>
+        <h1 id="hero-heading" class="font-heading text-5xl sm:text-6xl lg:text-7xl text-dark leading-tight mb-6">
+          Everything Your Pet
+          <span class="text-primary"> Loves</span>
+        </h1>
+        <p class="text-stone-600 text-lg leading-relaxed mb-8 max-w-lg">
+          Premium food, toys, accessories, and care products — all handpicked by vets and loved by pets. Free shipping on orders over $49.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#shop" class="btn-cta px-8 py-4 font-heading font-bold text-lg focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-cta">
+            Shop Now
+          </a>
+          <a href="#products" class="px-8 py-4 font-heading font-bold text-lg text-dark clay-card inline-flex items-center gap-2 cursor-pointer focus-visible:ring-2 focus-visible:ring-primary rounded-full">
+            View Products
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="flex items-center gap-6 mt-10">
+          <div class="flex -space-x-3">
+            <img src="https://i.pravatar.cc/40?img=1" alt="Customer avatar" width="40" height="40" class="w-10 h-10 rounded-full border-2 border-white" loading="lazy"/>
+            <img src="https://i.pravatar.cc/40?img=5" alt="Customer avatar" width="40" height="40" class="w-10 h-10 rounded-full border-2 border-white" loading="lazy"/>
+            <img src="https://i.pravatar.cc/40?img=9" alt="Customer avatar" width="40" height="40" class="w-10 h-10 rounded-full border-2 border-white" loading="lazy"/>
+            <img src="https://i.pravatar.cc/40?img=12" alt="Customer avatar" width="40" height="40" class="w-10 h-10 rounded-full border-2 border-white" loading="lazy"/>
+          </div>
+          <div>
+            <div class="flex gap-0.5" aria-label="4.9 out of 5 stars">
+              <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p class="text-sm text-stone-500 mt-0.5">4.9/5 · 12,000+ reviews</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero illustration -->
+      <div class="relative flex justify-center items-center" aria-hidden="true">
+        <div class="w-80 h-80 sm:w-96 sm:h-96 rounded-full border-4 flex items-center justify-center shadow-xl relative overflow-hidden" style="background:#ede8ee; border-color:#c9b8ca;">
+          <svg viewBox="0 0 300 300" width="280" height="280" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Happy dog illustration">
+            <!-- Body -->
+            <ellipse cx="150" cy="200" rx="80" ry="70" fill="#D97706"/>
+            <!-- Head -->
+            <circle cx="150" cy="130" r="65" fill="#F59E0B"/>
+            <!-- Ears -->
+            <ellipse cx="100" cy="100" rx="22" ry="34" fill="#D97706" transform="rotate(-15 100 100)"/>
+            <ellipse cx="200" cy="100" rx="22" ry="34" fill="#D97706" transform="rotate(15 200 100)"/>
+            <!-- Face -->
+            <ellipse cx="150" cy="145" rx="35" ry="28" fill="#FEF3C7"/>
+            <!-- Eyes -->
+            <circle cx="133" cy="120" r="11" fill="#1C1917"/>
+            <circle cx="167" cy="120" r="11" fill="#1C1917"/>
+            <circle cx="136" cy="117" r="4" fill="white"/>
+            <circle cx="170" cy="117" r="4" fill="white"/>
+            <!-- Nose -->
+            <ellipse cx="150" cy="139" rx="9" ry="6" fill="#1C1917"/>
+            <!-- Mouth -->
+            <path d="M138 148 Q150 162 162 148" stroke="#1C1917" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <!-- Tongue -->
+            <ellipse cx="150" cy="161" rx="10" ry="8" fill="#F43F5E"/>
+            <!-- Paws -->
+            <ellipse cx="105" cy="248" rx="22" ry="16" fill="#F59E0B"/>
+            <ellipse cx="195" cy="248" rx="22" ry="16" fill="#F59E0B"/>
+            <!-- Paw dots -->
+            <circle cx="99" cy="245" r="4" fill="#D97706"/>
+            <circle cx="111" cy="245" r="4" fill="#D97706"/>
+            <circle cx="105" cy="256" r="4" fill="#D97706"/>
+            <circle cx="189" cy="245" r="4" fill="#D97706"/>
+            <circle cx="201" cy="245" r="4" fill="#D97706"/>
+            <circle cx="195" cy="256" r="4" fill="#D97706"/>
+            <!-- Tail -->
+            <path d="M225 180 Q265 150 260 120 Q255 100 240 110 Q250 125 245 145 Q240 165 220 185Z" fill="#F59E0B"/>
+            <!-- Collar -->
+            <path d="M110 167 Q150 180 190 167" stroke="#6f5170" stroke-width="10" stroke-linecap="round" fill="none"/>
+            <circle cx="150" cy="178" r="7" fill="#8f8e97" stroke="#2C2C2A" stroke-width="2"/>
+          </svg>
+        </div>
+        <!-- Floating badges -->
+        <div class="absolute top-4 -left-4 clay-card bg-white px-3 py-2 flex items-center gap-2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+          <span class="text-xs font-semibold text-stone-700">Free Shipping</span>
+        </div>
+        <div class="absolute bottom-8 -right-4 clay-card bg-white px-3 py-2 flex items-center gap-2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6f5170" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span class="text-xs font-semibold text-stone-700">Vet Approved</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="py-8 px-4 sm:px-6 lg:px-8 border-y-2" style="background:rgba(111,81,112,0.08); border-color:rgba(111,81,112,0.20);" aria-label="Trust indicators">
+    <div class="max-w-6xl mx-auto flex flex-wrap justify-center gap-8 md:gap-16">
+      <div class="flex items-center gap-3">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6f5170" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <span class="font-semibold text-dark">Free delivery over $49</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6f5170" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span class="font-semibold text-dark">Vet-approved products</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6f5170" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        <span class="font-semibold text-dark">30-day returns</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6f5170" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span class="font-semibold text-dark">24/7 customer support</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products" class="py-24 px-4 sm:px-6 lg:px-8" aria-labelledby="products-heading">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-14">
+        <h2 id="products-heading" class="font-heading text-4xl sm:text-5xl text-dark mb-4">Shop by Category</h2>
+        <p class="text-stone-500 text-lg max-w-xl mx-auto">From gourmet food to cozy beds — we carry everything your furry friend deserves.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+        <a href="#" class="clay-card p-6 text-center cursor-pointer focus-visible:ring-2 focus-visible:ring-primary group" aria-label="Shop Dog Food">
+          <div class="w-16 h-16 rounded-clay mx-auto mb-4 flex items-center justify-center transition-colors duration-200" style="background:rgba(111,81,112,0.10);">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#6f5170" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          </div>
+          <h3 class="font-heading text-dark font-bold">Dog Food</h3>
+          <p class="text-sm text-stone-500 mt-1">42 products</p>
+        </a>
+
+        <a href="#" class="clay-card p-6 text-center cursor-pointer focus-visible:ring-2 focus-visible:ring-primary group" aria-label="Shop Cat Toys">
+          <div class="w-16 h-16 rounded-clay mx-auto mb-4 flex items-center justify-center transition-colors duration-200" style="background:rgba(111,81,112,0.10);">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#6f5170" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          </div>
+          <h3 class="font-heading text-dark font-bold">Cat Toys</h3>
+          <p class="text-sm text-stone-500 mt-1">38 products</p>
+        </a>
+
+        <a href="#" class="clay-card p-6 text-center cursor-pointer focus-visible:ring-2 focus-visible:ring-primary group" aria-label="Shop Accessories">
+          <div class="w-16 h-16 rounded-clay mx-auto mb-4 flex items-center justify-center transition-colors duration-200" style="background:rgba(111,81,112,0.10);">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#6f5170" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </div>
+          <h3 class="font-heading text-dark font-bold">Accessories</h3>
+          <p class="text-sm text-stone-500 mt-1">61 products</p>
+        </a>
+
+        <a href="#" class="clay-card p-6 text-center cursor-pointer focus-visible:ring-2 focus-visible:ring-primary group" aria-label="Shop Pet Care">
+          <div class="w-16 h-16 rounded-clay mx-auto mb-4 flex items-center justify-center transition-colors duration-200" style="background:rgba(111,81,112,0.10);">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#6f5170" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <h3 class="font-heading text-dark font-bold">Pet Care</h3>
+          <p class="text-sm text-stone-500 mt-1">29 products</p>
+        </a>
+      </div>
+
+      <!-- Featured Products -->
+      <div class="mt-16">
+        <h3 class="font-heading text-3xl text-dark mb-8 text-center">Bestsellers</h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <article class="clay-card overflow-hidden cursor-pointer focus-visible:ring-2 focus-visible:ring-primary" tabindex="0">
+            <div class="h-48 flex items-center justify-center relative" style="background:rgba(111,81,112,0.06);">
+              <svg viewBox="0 0 200 150" width="180" height="120" fill="none" aria-hidden="true">
+                <rect x="40" y="40" width="120" height="80" rx="16" fill="#e8e0e9" stroke="#6f5170" stroke-width="3"/>
+                <rect x="55" y="28" width="28" height="20" rx="8" fill="#e8e0e9" stroke="#6f5170" stroke-width="3"/>
+                <rect x="117" y="28" width="28" height="20" rx="8" fill="#e8e0e9" stroke="#6f5170" stroke-width="3"/>
+                <text x="100" y="95" font-family="Nunito Sans" font-size="10" fill="#2C2C2A" text-anchor="middle">Premium Bowl</text>
+              </svg>
+              <span class="absolute top-3 left-3 text-white text-xs font-bold px-3 py-1 rounded-full" style="background:#6f5170;">Best Seller</span>
+            </div>
+            <div class="p-5">
+              <h4 class="font-heading text-lg text-dark font-bold">Ceramic Pet Bowl Set</h4>
+              <p class="text-stone-500 text-sm mt-1">Non-slip, dishwasher-safe. Perfect for dogs and cats.</p>
+              <div class="flex items-center justify-between mt-4">
+                <div>
+                  <span class="text-primary font-heading font-bold text-xl">$24.99</span>
+                  <span class="text-stone-400 line-through text-sm ml-2">$34.99</span>
+                </div>
+                <button class="btn-primary px-4 py-2 text-sm font-bold focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary" aria-label="Add Ceramic Pet Bowl Set to cart">Add to Cart</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="clay-card overflow-hidden cursor-pointer focus-visible:ring-2 focus-visible:ring-primary" tabindex="0">
+            <div class="h-48 flex items-center justify-center relative" style="background:rgba(222,226,244,0.50);">
+              <svg viewBox="0 0 200 150" width="180" height="120" fill="none" aria-hidden="true">
+                <rect x="30" y="60" width="140" height="70" rx="20" fill="#dee2f4" stroke="#6f5170" stroke-width="3"/>
+                <rect x="50" y="38" width="100" height="30" rx="10" fill="#dee2f4" stroke="#6f5170" stroke-width="3"/>
+                <circle cx="100" cy="75" r="14" fill="#6f5170" opacity="0.2"/>
+                <text x="100" y="108" font-family="Nunito Sans" font-size="10" fill="#2C2C2A" text-anchor="middle">Cozy Bed</text>
+              </svg>
+              <span class="absolute top-3 left-3 text-white text-xs font-bold px-3 py-1 rounded-full" style="background:#8f8e97;">New</span>
+            </div>
+            <div class="p-5">
+              <h4 class="font-heading text-lg text-dark font-bold">Cloud Comfort Pet Bed</h4>
+              <p class="text-stone-500 text-sm mt-1">Memory foam, washable cover. Available in 3 sizes.</p>
+              <div class="flex items-center justify-between mt-4">
+                <div>
+                  <span class="text-primary font-heading font-bold text-xl">$49.99</span>
+                </div>
+                <button class="btn-primary px-4 py-2 text-sm font-bold focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary" aria-label="Add Cloud Comfort Pet Bed to cart">Add to Cart</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="clay-card overflow-hidden cursor-pointer focus-visible:ring-2 focus-visible:ring-primary" tabindex="0">
+            <div class="bg-green-50 h-48 flex items-center justify-center relative">
+              <svg viewBox="0 0 200 150" width="180" height="120" fill="none" aria-hidden="true">
+                <rect x="70" y="30" width="60" height="100" rx="14" fill="#BBF7D0" stroke="#16a34a" stroke-width="3"/>
+                <rect x="82" y="20" width="36" height="18" rx="8" fill="#BBF7D0" stroke="#16a34a" stroke-width="3"/>
+                <rect x="82" y="62" width="36" height="8" rx="4" fill="#16a34a" opacity="0.4"/>
+                <rect x="82" y="78" width="36" height="8" rx="4" fill="#16a34a" opacity="0.4"/>
+                <rect x="82" y="94" width="36" height="8" rx="4" fill="#16a34a" opacity="0.4"/>
+                <text x="100" y="118" font-family="Nunito Sans" font-size="9" fill="#166534" text-anchor="middle">Natural Treats</text>
+              </svg>
+              <span class="absolute top-3 left-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">Organic</span>
+            </div>
+            <div class="p-5">
+              <h4 class="font-heading text-lg text-dark font-bold">Organic Treat Bundle</h4>
+              <p class="text-stone-500 text-sm mt-1">All-natural ingredients, grain-free. Dogs go crazy for them.</p>
+              <div class="flex items-center justify-between mt-4">
+                <div>
+                  <span class="text-primary font-heading font-bold text-xl">$18.99</span>
+                </div>
+                <button class="btn-primary px-4 py-2 text-sm font-bold focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary" aria-label="Add Organic Treat Bundle to cart">Add to Cart</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="py-24 px-4 sm:px-6 lg:px-8" style="background:rgba(111,81,112,0.06);" aria-labelledby="features-heading">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-14">
+        <h2 id="features-heading" class="font-heading text-4xl sm:text-5xl text-dark mb-4">Why PawShop?</h2>
+        <p class="text-stone-500 text-lg max-w-xl mx-auto">We believe your pets deserve the very best. Here's what sets us apart.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <div class="clay-card p-8 text-center">
+          <div class="w-20 h-20 rounded-clay mx-auto mb-6 flex items-center justify-center" style="background:rgba(111,81,112,0.10);">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6f5170" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="font-heading text-xl text-dark mb-3">Vet Curated</h3>
+          <p class="text-stone-500 leading-relaxed">Every product is reviewed and approved by our team of licensed veterinarians to ensure safety and quality.</p>
+        </div>
+
+        <div class="clay-card p-8 text-center" style="transform: translateY(-8px);">
+          <div class="w-20 h-20 rounded-clay mx-auto mb-6 flex items-center justify-center" style="background:rgba(222,226,244,0.60);">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6f5170" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <h3 class="font-heading text-xl text-dark mb-3">Fast Delivery</h3>
+          <p class="text-stone-500 leading-relaxed">Same-day dispatch for orders before 2pm. Free shipping on all orders above $49 nationwide.</p>
+        </div>
+
+        <div class="clay-card p-8 text-center">
+          <div class="w-20 h-20 bg-green-100 rounded-clay mx-auto mb-6 flex items-center justify-center">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3 class="font-heading text-xl text-dark mb-3">Eco-Friendly</h3>
+          <p class="text-stone-500 leading-relaxed">Sustainably sourced products, recyclable packaging, and we plant a tree with every purchase.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews" class="py-24 px-4 sm:px-6 lg:px-8" aria-labelledby="reviews-heading">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-14">
+        <h2 id="reviews-heading" class="font-heading text-4xl sm:text-5xl text-dark mb-4">Happy Pet Parents</h2>
+        <p class="text-stone-500 text-lg">Don't take our word for it — hear from real customers.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <blockquote class="clay-card p-7">
+          <div class="flex gap-1 mb-4" aria-label="5 out of 5 stars">
+            <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="text-stone-600 italic leading-relaxed mb-6">"My golden retriever absolutely loves the treat bundles. They arrived next day, perfectly packaged. Will definitely be a repeat customer!"</p>
+          <footer class="flex items-center gap-3">
+            <img src="https://i.pravatar.cc/44?img=47" alt="Sarah M." width="44" height="44" class="w-11 h-11 rounded-full border-2" style="border-color:rgba(111,81,112,0.30);" loading="lazy"/>
+            <div>
+              <cite class="font-heading font-bold text-dark not-italic">Sarah M.</cite>
+              <p class="text-xs text-stone-400">Dog mom · Austin, TX</p>
+            </div>
+          </footer>
+        </blockquote>
+
+        <blockquote class="clay-card p-7 text-white" style="background:#6f5170; border-color:rgba(0,0,0,0.10);">
+          <div class="flex gap-1 mb-4" aria-label="5 out of 5 stars">
+            <svg class="w-5 h-5" style="color:#fde68a;" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-5 h-5" style="color:#fde68a;" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-5 h-5" style="color:#fde68a;" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-5 h-5" style="color:#fde68a;" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-5 h-5" style="color:#fde68a;" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="italic leading-relaxed mb-6" style="color:rgba(255,255,255,0.92);">"The ceramic bowls are so beautiful and my cats love them. The quality is outstanding for the price. Customer support was also incredibly responsive!"</p>
+          <footer class="flex items-center gap-3">
+            <img src="https://i.pravatar.cc/44?img=32" alt="James K." width="44" height="44" class="w-11 h-11 rounded-full border-2" style="border-color:rgba(255,255,255,0.40);" loading="lazy"/>
+            <div>
+              <cite class="font-heading font-bold text-white not-italic">James K.</cite>
+              <p class="text-xs" style="color:rgba(222,226,244,0.80);">Cat parent · Seattle, WA</p>
+            </div>
+          </footer>
+        </blockquote>
+
+        <blockquote class="clay-card p-7">
+          <div class="flex gap-1 mb-4" aria-label="5 out of 5 stars">
+            <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="text-stone-600 italic leading-relaxed mb-6">"I switched my pup to PawShop's organic food range and the difference is visible. His coat is shinier and he has so much more energy. Highly recommend!"</p>
+          <footer class="flex items-center gap-3">
+            <img src="https://i.pravatar.cc/44?img=21" alt="Maria L." width="44" height="44" class="w-11 h-11 rounded-full border-2" style="border-color:rgba(111,81,112,0.30);" loading="lazy"/>
+            <div>
+              <cite class="font-heading font-bold text-dark not-italic">Maria L.</cite>
+              <p class="text-xs text-stone-400">Dog mom · Chicago, IL</p>
+            </div>
+          </footer>
+        </blockquote>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section id="shop" class="py-20 px-4 sm:px-6 lg:px-8" aria-labelledby="cta-heading">
+    <div class="max-w-4xl mx-auto">
+      <div class="clay-card p-10 sm:p-14 text-center relative overflow-hidden" style="background:linear-gradient(135deg, rgba(111,81,112,0.08) 0%, rgba(222,226,244,0.60) 100%);">
+        <div class="blob w-64 h-64 bg-primary -top-16 -right-16" aria-hidden="true"></div>
+        <div class="relative z-10">
+          <h2 id="cta-heading" class="font-heading text-4xl sm:text-5xl text-dark mb-4">Ready to Spoil Your Pet?</h2>
+          <p class="text-stone-600 text-lg mb-8 max-w-lg mx-auto">Join over 50,000 happy pet owners. Get 15% off your first order with code <strong class="text-primary">PAWSOME</strong>.</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#" class="btn-cta px-10 py-4 font-heading font-bold text-lg inline-block focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-cta">
+              Start Shopping
+            </a>
+            <a href="#" class="clay-card px-10 py-4 font-heading font-bold text-lg text-dark inline-block cursor-pointer focus-visible:ring-2 focus-visible:ring-primary">
+              Browse All Products
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="pt-16 pb-8 px-4 sm:px-6 lg:px-8" style="background:#2C2C2A; color:#8f8e97;" role="contentinfo">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex items-center gap-2 mb-4">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <circle cx="16" cy="16" r="16" fill="#6f5170"/>
+              <ellipse cx="11" cy="11" rx="3" ry="4" fill="#fff" opacity="0.9"/>
+              <ellipse cx="21" cy="11" rx="3" ry="4" fill="#fff" opacity="0.9"/>
+              <ellipse cx="9" cy="19" rx="2.5" ry="3.5" fill="#fff" opacity="0.9"/>
+              <ellipse cx="23" cy="19" rx="2.5" ry="3.5" fill="#fff" opacity="0.9"/>
+              <ellipse cx="16" cy="21" rx="5" ry="6" fill="#fff"/>
+            </svg>
+            <span class="font-heading text-xl text-white font-bold">PawShop</span>
+          </div>
+          <p class="text-sm leading-relaxed" style="color:#8f8e97;">Premium pet products, loved by pets and trusted by their humans since 2019.</p>
+        </div>
+
+        <nav aria-label="Shop navigation">
+          <h3 class="font-heading text-white font-bold mb-4">Shop</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="transition-colors duration-200 cursor-pointer focus-visible:ring-1 focus-visible:ring-primary rounded hover:text-white" style="color:#8f8e97;">Dog Products</a></li>
+            <li><a href="#" class="transition-colors duration-200 cursor-pointer focus-visible:ring-1 focus-visible:ring-primary rounded hover:text-white" style="color:#8f8e97;">Cat Products</a></li>
+            <li><a href="#" class="transition-colors duration-200 cursor-pointer focus-visible:ring-1 focus-visible:ring-primary rounded hover:text-white" style="color:#8f8e97;">Small Pets</a></li>
+            <li><a href="#" class="transition-colors duration-200 cursor-pointer focus-visible:ring-1 focus-visible:ring-primary rounded hover:text-white" style="color:#8f8e97;">New Arrivals</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-label="Company navigation">
+          <h3 class="font-heading text-white font-bold mb-4">Company</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="transition-colors duration-200 cursor-pointer focus-visible:ring-1 focus-visible:ring-primary rounded hover:text-white" style="color:#8f8e97;">About Us</a></li>
+            <li><a href="#" class="transition-colors duration-200 cursor-pointer focus-visible:ring-1 focus-visible:ring-primary rounded hover:text-white" style="color:#8f8e97;">Blog</a></li>
+            <li><a href="#" class="transition-colors duration-200 cursor-pointer focus-visible:ring-1 focus-visible:ring-primary rounded hover:text-white" style="color:#8f8e97;">Careers</a></li>
+            <li><a href="#" class="transition-colors duration-200 cursor-pointer focus-visible:ring-1 focus-visible:ring-primary rounded hover:text-white" style="color:#8f8e97;">Press</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-label="Support navigation">
+          <h3 class="font-heading text-white font-bold mb-4">Support</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="transition-colors duration-200 cursor-pointer focus-visible:ring-1 focus-visible:ring-primary rounded hover:text-white" style="color:#8f8e97;">Contact Us</a></li>
+            <li><a href="#" class="transition-colors duration-200 cursor-pointer focus-visible:ring-1 focus-visible:ring-primary rounded hover:text-white" style="color:#8f8e97;">FAQ</a></li>
+            <li><a href="#" class="transition-colors duration-200 cursor-pointer focus-visible:ring-1 focus-visible:ring-primary rounded hover:text-white" style="color:#8f8e97;">Shipping Policy</a></li>
+            <li><a href="#" class="transition-colors duration-200 cursor-pointer focus-visible:ring-1 focus-visible:ring-primary rounded hover:text-white" style="color:#8f8e97;">Returns</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm" style="border-top:1px solid rgba(143,142,151,0.20); color:#8f8e97;">
+        <p>&copy; 2026 PawShop. All rights reserved.</p>
+        <div class="flex gap-5">
+          <a href="#" aria-label="PawShop on Facebook" class="hover:text-white transition-colors duration-200 cursor-pointer focus-visible:ring-1 focus-visible:ring-primary rounded">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="#" aria-label="PawShop on Instagram" class="hover:text-white transition-colors duration-200 cursor-pointer focus-visible:ring-1 focus-visible:ring-primary rounded">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" aria-label="PawShop on Twitter/X" class="hover:text-white transition-colors duration-200 cursor-pointer focus-visible:ring-1 focus-visible:ring-primary rounded">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
