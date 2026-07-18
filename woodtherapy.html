@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WoodTherapy — Ortopedyczne legowiska dla psów z litego drewna</title>
+<meta name="description" content="Ręcznie robione legowiska ortopedyczne z litego drewna: dąb, orzech włoski, olcha. Tkaniny Davis. Produkcja w Polsce.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --orange:#3A3A3E;          /* encre principale Honey (confirmée: logo Paws) */
+    --orange-dark:#232326;
+    --orange-soft:#ECE7DF;
+    --camel:#A67B5B;           /* accent cuir/camel */
+    --cream:#FFFFFF;           /* fond blanc galerie */
+    --peach:#F7F4EF;           /* sections chaudes off-white */
+    --char:#1C1C1E;
+    --gray:#716C65;
+    --white:#FFFFFF;
+    --green:#3E7A45;
+    --radius:10px;
+    --pill:8px;
+    --shadow:0 8px 26px rgba(28,28,30,.08);
+    --font-head:'Playfair Display',serif;
+    --font-body:'Inter',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font-body);color:var(--char);background:var(--cream);line-height:1.65;font-size:15px}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3,h4,h5{font-family:var(--font-head);color:var(--char);line-height:1.12;font-weight:700}
+  .container{max-width:1280px;margin:0 auto;padding:0 24px}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;font-weight:600;font-family:var(--font-body);
+    padding:14px 32px;border-radius:var(--pill);border:none;cursor:pointer;font-size:14px;letter-spacing:.06em;text-transform:uppercase;transition:.25s;box-shadow:0 6px 18px rgba(28,28,30,.18)}
+  .btn:hover{background:var(--camel);box-shadow:none;transform:translateY(-2px)}
+  .btn--dark{background:var(--char);box-shadow:none}
+  .btn--dark:hover{background:var(--camel)}
+  .btn--ghost{background:transparent;color:var(--char);border:2px solid var(--char);box-shadow:none}
+  .btn--ghost:hover{background:var(--char);color:#fff}
+  .kicker{display:inline-block;color:var(--camel);font-weight:600;font-size:12px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:10px}
+  .sec-head{text-align:center;max-width:680px;margin:0 auto 44px}
+  .sec-head h2{font-size:clamp(28px,3.4vw,42px)}
+  .sec-head p{color:var(--gray);margin-top:8px}
+
+  /* ===== Announcement ===== */
+  .announce{background:var(--char);color:#fff;text-align:center;font-size:13px;font-weight:500;padding:10px 16px}
+  .announce b{color:#C99B72}
+
+  /* ===== Header ===== */
+  header{position:sticky;top:0;z-index:60;background:var(--white);box-shadow:0 1px 0 rgba(0,0,0,.06)}
+  .nav{display:flex;align-items:center;gap:26px;padding:14px 24px;max-width:1400px;margin:0 auto}
+  .nav__logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+  .nav__logo img{width:52px;height:52px;border-radius:50%}
+  .nav__logo strong{font-family:var(--font-head);font-size:24px;font-weight:800;color:var(--char);line-height:1}
+  .nav__logo small{display:block;font-size:10px;color:var(--gray);letter-spacing:.14em;text-transform:uppercase;font-family:var(--font-body)}
+  .nav__links{display:flex;gap:24px;font-weight:500;font-size:14.5px}
+  .nav__links>li{list-style:none;position:relative}
+  .nav__links a:hover{color:var(--camel)}
+  .nav__links .has-drop>a::after{content:" ▾";font-size:11px}
+  .drop{position:absolute;top:calc(100% + 14px);left:-16px;background:#fff;border-radius:14px;box-shadow:var(--shadow);
+    padding:14px 0;min-width:220px;opacity:0;visibility:hidden;transform:translateY(8px);transition:.25s}
+  .has-drop:hover .drop{opacity:1;visibility:visible;transform:translateY(0)}
+  .drop a{display:block;padding:8px 22px;font-size:14px}
+  .drop a:hover{background:var(--peach);color:var(--camel)}
+  .nav__search{flex:1;display:flex;max-width:440px;border:1.5px solid #e8e0d5;border-radius:var(--pill);overflow:hidden;background:var(--cream)}
+  .nav__search input{flex:1;border:none;background:transparent;padding:11px 20px;font-family:var(--font-body);font-size:14px;outline:none}
+  .nav__search button{border:none;background:var(--orange);color:#fff;padding:0 22px;cursor:pointer;font-size:16px;transition:.25s}
+  .nav__search button:hover{background:var(--char)}
+  .nav__icons{display:flex;align-items:center;gap:18px;margin-left:auto}
+  .nav__icons .ic{position:relative;font-size:20px;cursor:pointer;transition:.2s}
+  .nav__icons .ic:hover{transform:scale(1.12)}
+  .nav__icons .ic .bubble{position:absolute;top:-8px;right:-10px;background:var(--camel);color:#fff;font-size:10.5px;font-weight:700;
+    min-width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0 4px}
+  .burger{display:none;font-size:26px;background:none;border:none;color:var(--char);cursor:pointer}
+
+  /* ===== Hero slideshow ===== */
+  .hero{position:relative;background:var(--peach);overflow:hidden}
+  .slide{display:none;animation:fade .7s ease}
+  .slide.active{display:block}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  .slide__grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;min-height:540px;padding:40px 0}
+  .slide__txt .kicker{background:var(--orange-soft);color:var(--orange-dark);padding:6px 16px;border-radius:var(--pill);letter-spacing:.06em}
+  .slide__txt h1{font-size:clamp(36px,4.6vw,60px);font-weight:700;margin:14px 0 16px}
+  .slide__txt h1 span{color:var(--camel);font-style:italic}
+  .slide__txt p{color:var(--gray);font-size:16.5px;max-width:470px;margin-bottom:28px}
+  .slide__img{position:relative}
+  .slide__img>img{border-radius:24px;box-shadow:var(--shadow);width:100%;aspect-ratio:4/3;object-fit:cover}
+  .sticker{position:absolute;top:-16px;right:-6px;background:var(--camel);color:#fff;font-family:var(--font-head);font-weight:700;
+    width:92px;height:92px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    font-size:13px;line-height:1.1;transform:rotate(10deg);box-shadow:var(--shadow);text-align:center;animation:wiggle 3s ease-in-out infinite}
+  .sticker b{font-size:22px}
+  @keyframes wiggle{0%,100%{transform:rotate(8deg)}50%{transform:rotate(14deg)}}
+  .hero__dots{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:5}
+  .hero__dots button{width:11px;height:11px;border-radius:50%;border:none;background:#d9d4cc;cursor:pointer;transition:.25s}
+  .hero__dots button.active{background:var(--char);width:28px;border-radius:999px}
+
+  /* ===== Marquee ===== */
+  .marquee{background:var(--char);color:#fff;overflow:hidden;padding:12px 0;font-family:var(--font-body);font-weight:500;letter-spacing:.12em;text-transform:uppercase;font-size:12px}
+  .marquee__inner{display:flex;gap:44px;white-space:nowrap;animation:scroll 26s linear infinite;width:max-content}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ===== Category circles ===== */
+  .cats{padding:74px 0 60px}
+  .cats__grid{display:flex;justify-content:center;gap:34px;flex-wrap:wrap}
+  .cat{text-align:center;width:150px}
+  .cat__img{width:140px;height:140px;border-radius:50%;overflow:hidden;border:4px solid #fff;box-shadow:var(--shadow);
+    margin:0 auto 14px;transition:.3s;position:relative}
+  .cat:hover .cat__img{transform:translateY(-6px) scale(1.04);border-color:var(--camel)}
+  .cat__img img{width:100%;height:100%;object-fit:cover}
+  .cat b{font-family:var(--font-head);font-size:16px;font-weight:600}
+
+  /* ===== Statement ===== */
+  .statement{padding:30px 0 70px;text-align:center}
+  .statement h2{font-size:clamp(24px,3vw,38px);max-width:900px;margin:0 auto;font-weight:600}
+  .statement h2 em{color:var(--camel);font-style:italic}
+
+  /* ===== Countdown promo ===== */
+  .promo{background:var(--char);color:#fff;padding:70px 0;position:relative;overflow:hidden}
+  .promo::before{content:"🐾";position:absolute;font-size:200px;opacity:.06;right:-20px;top:-40px;transform:rotate(-18deg)}
+  .promo__grid{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+  .promo h2{color:#fff;font-size:clamp(28px,3.6vw,46px);font-weight:800;margin-bottom:10px}
+  .promo h2 b{color:var(--camel)}
+  .promo p{color:#cfc7bf;margin-bottom:26px;max-width:480px}
+  .count{display:flex;gap:14px;margin-bottom:30px}
+  .count__box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;
+    min-width:84px;padding:14px 10px;text-align:center}
+  .count__box b{display:block;font-family:var(--font-head);font-size:32px;font-weight:700;color:var(--camel);line-height:1}
+  .count__box span{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#b6aca2}
+  .promo__img img{border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.4)}
+
+  /* ===== Product tabs ===== */
+  .picks{padding:90px 0 40px}
+  .tabs{display:flex;justify-content:center;gap:10px;margin-bottom:40px;flex-wrap:wrap}
+  .tab{padding:11px 26px;border-radius:var(--pill);border:1.5px solid #e5dccf;background:#fff;font-family:var(--font-head);
+    font-weight:600;font-size:15px;cursor:pointer;transition:.25s}
+  .tab:hover{border-color:var(--char);color:var(--char)}
+  .tab.active{background:var(--char);border-color:var(--char);color:#fff;box-shadow:0 6px 18px rgba(28,28,30,.2)}
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:.3s;position:relative}
+  .card:hover{transform:translateY(-8px)}
+  .card__badge{position:absolute;top:14px;left:14px;background:var(--camel);color:#fff;font-size:11.5px;font-weight:600;
+    padding:5px 13px;border-radius:var(--pill);z-index:2}
+  .card__badge--dark{background:var(--char)}
+  .card__img{aspect-ratio:1/1;overflow:hidden;background:var(--cream)}
+  .card__img img{width:100%;height:100%;object-fit:cover;transition:.5s}
+  .card:hover .card__img img{transform:scale(1.08)}
+  .card__body{padding:18px 18px 22px;text-align:center}
+  .card__body .stars{color:var(--camel);font-size:13px;letter-spacing:2px}
+  .card__body h3{font-size:17px;font-weight:600;margin:6px 0 4px}
+  .card__body .price{font-weight:700;color:var(--camel);font-size:16px}
+  .card__body .price s{color:#b9b0a6;font-weight:500;margin-left:8px;font-size:13.5px}
+  .card__btn{margin-top:14px;width:100%;justify-content:center;padding:11px;font-size:13.5px}
+  .pane{display:none}
+  .pane.active{display:grid;animation:fade .5s ease}
+
+  /* ===== Configurator ===== */
+  .config{padding:80px 0}
+  .config__grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
+  .gallery__main{border-radius:20px;overflow:hidden;box-shadow:var(--shadow);background:#fff;position:relative}
+  .gallery__main img{width:100%;aspect-ratio:1/1;object-fit:cover;transition:.3s}
+  .gallery__badge{position:absolute;top:16px;left:16px;background:var(--camel);color:#fff;font-size:12px;font-weight:600;
+    padding:6px 15px;border-radius:var(--pill);z-index:2}
+  .gallery__thumbs{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:12px}
+  .gallery__thumbs img{aspect-ratio:1/1;object-fit:cover;border-radius:12px;cursor:pointer;border:2.5px solid transparent;transition:.2s;background:#fff}
+  .gallery__thumbs img.active,.gallery__thumbs img:hover{border-color:var(--camel)}
+  .pinfo .vendor{color:var(--camel);font-weight:600;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase}
+  .pinfo h2{font-size:clamp(26px,3vw,36px);margin:6px 0 10px;font-weight:700}
+  .pinfo .stars{color:var(--camel);font-weight:600;font-size:15px;margin-bottom:14px}
+  .pinfo .stars small{color:var(--gray);font-weight:400}
+  .bigprice{font-family:var(--font-head);font-size:34px;font-weight:800;color:var(--char)}
+  .bigprice small{font-size:14px;color:var(--gray);font-family:var(--font-body);font-weight:400}
+  .stock{display:inline-flex;align-items:center;gap:8px;color:var(--green);font-weight:600;font-size:13.5px;margin:6px 0 24px}
+  .stock::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(62,122,69,.15)}
+  .opt{margin-bottom:20px}
+  .opt__label{font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;display:block}
+  .opt__label span{color:var(--camel)}
+  .chips{display:flex;gap:10px;flex-wrap:wrap}
+  .chip{padding:10px 20px;border-radius:var(--pill);border:1.5px solid #e5dccf;background:#fff;font-weight:500;font-size:14px;
+    cursor:pointer;transition:.2s;font-family:var(--font-body)}
+  .chip:hover{border-color:var(--char);color:var(--char)}
+  .chip.active{background:var(--char);color:#fff;border-color:var(--char)}
+  .swatches{display:flex;gap:12px;flex-wrap:wrap}
+  .swatch{width:52px;height:52px;border-radius:50%;overflow:hidden;cursor:pointer;border:3px solid #fff;
+    box-shadow:0 0 0 1.5px #e5dccf,var(--shadow);transition:.2s}
+  .swatch img{width:100%;height:100%;object-fit:cover}
+  .swatch.active{box-shadow:0 0 0 2.5px var(--char);transform:scale(1.1)}
+  .buy{display:flex;gap:14px;align-items:center;margin:26px 0 12px}
+  .qty{display:flex;align-items:center;border:1.5px solid #e5dccf;border-radius:var(--pill);background:#fff}
+  .qty button{width:42px;height:48px;border:none;background:none;font-size:19px;cursor:pointer;color:var(--char)}
+  .qty input{width:38px;text-align:center;border:none;background:none;font-weight:600;font-size:15px;font-family:var(--font-body)}
+  .buy .btn{flex:1;justify-content:center;font-size:15.5px}
+  .note{font-size:12.5px;color:var(--gray);margin-bottom:20px}
+  .accordion{border-top:1px solid #eee3d4}
+  .acc__item{border-bottom:1px solid #eee3d4}
+  .acc__head{width:100%;background:none;border:none;display:flex;justify-content:space-between;align-items:center;
+    padding:16px 4px;font-weight:600;font-size:15px;font-family:var(--font-body);color:var(--char);cursor:pointer}
+  .acc__head::after{content:"+";font-family:var(--font-head);font-size:22px;color:var(--camel);transition:.25s}
+  .acc__item.open .acc__head::after{transform:rotate(45deg)}
+  .acc__body{max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:14px;color:var(--gray)}
+  .acc__body-inner{padding:0 4px 18px}
+  .acc__body table{width:100%;border-collapse:collapse;font-size:13.5px}
+  .acc__body th,.acc__body td{text-align:left;padding:8px 10px;border-bottom:1px solid #f2e9db}
+  .acc__body th{color:var(--char)}
+
+  /* ===== Wide banner ===== */
+  .banner{position:relative;min-height:380px;display:flex;align-items:center;overflow:hidden;background:var(--orange-soft)}
+  .banner img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92}
+  .banner::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(31,31,31,.62) 0%,rgba(31,31,31,.15) 65%)}
+  .banner .container{position:relative;z-index:2}
+  .banner h2{color:#fff;font-size:clamp(30px,4vw,52px);font-weight:800;max-width:560px;margin-bottom:20px}
+  .banner h2 b{color:#C99B72;font-style:italic}
+
+  /* ===== Split (about) ===== */
+  .split{padding:90px 0}
+  .split__grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .split__imgwrap{position:relative}
+  .split__imgwrap img{border-radius:22px;box-shadow:var(--shadow)}
+  .split__stat{position:absolute;bottom:-20px;right:-14px;background:#fff;border-radius:16px;box-shadow:var(--shadow);
+    padding:16px 24px;text-align:center}
+  .split__stat b{display:block;font-family:var(--font-head);font-size:28px;font-weight:700;color:var(--camel);line-height:1.1}
+  .split__stat span{font-size:12px;color:var(--gray)}
+  .split h2{font-size:clamp(28px,3.4vw,42px);margin-bottom:16px}
+  .split p{color:var(--gray);margin-bottom:14px}
+  .split ul{list-style:none;margin:18px 0 28px}
+  .split li{padding-left:32px;position:relative;margin-bottom:12px;font-weight:500;font-size:15px}
+  .split li::before{content:"🐾";position:absolute;left:0}
+
+  /* ===== Before / After ===== */
+  .ba{background:var(--peach);padding:90px 0}
+  .ba__wrap{position:relative;max-width:860px;margin:0 auto;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);user-select:none}
+  .ba__wrap img{width:100%;aspect-ratio:16/10;object-fit:cover;pointer-events:none}
+  .ba__after{position:absolute;inset:0;overflow:hidden;width:50%}
+  .ba__after img{width:860px;max-width:none;height:100%}
+  .ba__range{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize}
+  .ba__line{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;pointer-events:none;box-shadow:0 0 12px rgba(0,0,0,.3)}
+  .ba__line::after{content:"↔";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--camel);
+    color:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700}
+  .ba__tag{position:absolute;bottom:16px;background:rgba(31,31,31,.75);color:#fff;font-size:12.5px;font-weight:600;
+    padding:6px 14px;border-radius:var(--pill);pointer-events:none}
+  .ba__tag--l{left:16px}
+  .ba__tag--r{right:16px}
+
+  /* ===== Promo tiles ===== */
+  .tiles{padding:90px 0 40px}
+  .tiles__grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .tile{position:relative;border-radius:20px;overflow:hidden;min-height:300px;display:flex;align-items:flex-end;box-shadow:var(--shadow)}
+  .tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:.5s}
+  .tile:hover img{transform:scale(1.06)}
+  .tile::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(31,31,31,.72) 0%,rgba(31,31,31,0) 55%)}
+  .tile__body{position:relative;z-index:2;padding:28px}
+  .tile__body h3{color:#fff;font-size:24px;font-weight:700;margin-bottom:12px}
+
+  /* ===== Fabrics ===== */
+  .fabrics{padding:60px 0 90px}
+  .fabrics__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .fabric{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:.3s;text-align:center}
+  .fabric:hover{transform:translateY(-6px)}
+  .fabric img{aspect-ratio:4/3;object-fit:cover;width:100%}
+  .fabric h3{font-size:16px;font-weight:700;padding:13px 10px 2px;letter-spacing:.05em}
+  .fabric p{font-size:12px;color:var(--gray);padding:0 14px 16px}
+
+  /* ===== Blog ===== */
+  .blog{background:var(--peach);padding:90px 0}
+  .blog__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .post{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:.3s}
+  .post:hover{transform:translateY(-6px)}
+  .post__img{aspect-ratio:16/10;overflow:hidden}
+  .post__img img{width:100%;height:100%;object-fit:cover;transition:.5s}
+  .post:hover .post__img img{transform:scale(1.06)}
+  .post__body{padding:22px}
+  .post__body small{color:var(--camel);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.14em}
+  .post__body h3{font-size:19px;font-weight:700;margin:6px 0 8px}
+  .post__body p{color:var(--gray);font-size:13.5px;margin-bottom:12px}
+  .post__body a{color:var(--camel);font-weight:600;font-size:13.5px}
+  .post__body a:hover{text-decoration:underline}
+
+  /* ===== FAQ ===== */
+  .faq{padding:90px 0}
+  .faq .accordion{max-width:760px;margin:0 auto}
+
+  /* ===== Trust badges ===== */
+  .trust{border-top:1px solid #eee3d4;background:#fff;padding:44px 0}
+  .trust__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .badge{display:flex;align-items:center;gap:14px;justify-content:center}
+  .badge .ico{width:54px;height:54px;border-radius:50%;background:var(--orange-soft);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+  .badge h4{font-size:15px;font-weight:700}
+  .badge p{font-size:12.5px;color:var(--gray)}
+
+  /* ===== Footer ===== */
+  footer{background:var(--char);color:#b7aea5;padding:70px 0 0}
+  .footer__grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.3fr;gap:40px;padding-bottom:50px}
+  .footer__brand img{width:64px;border-radius:50%;margin-bottom:14px;background:#fff}
+  .footer__brand p{font-size:13.5px;max-width:280px}
+  footer h5{color:#fff;font-size:16px;font-weight:700;margin-bottom:16px}
+  footer ul{list-style:none}
+  footer li{margin-bottom:10px;font-size:13.5px}
+  footer a:hover{color:#C99B72}
+  .footer__news p{font-size:13.5px;margin-bottom:14px}
+  .footer__news form{display:flex;border-radius:var(--pill);overflow:hidden;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14)}
+  .footer__news input{flex:1;border:none;background:transparent;color:#fff;padding:13px 18px;font-family:var(--font-body);font-size:13.5px;outline:none}
+  .footer__news button{border:none;background:var(--camel);color:#fff;padding:0 22px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:.25s}
+  .footer__news button:hover{background:#8d6749}
+  .footer__bottom{border-top:1px solid rgba(255,255,255,.1);padding:22px 0;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px}
+  .footer__bottom a{margin-right:16px}
+
+  /* ===== Toast ===== */
+  .toast{position:fixed;bottom:24px;right:24px;background:var(--char);color:#fff;padding:15px 24px;border-radius:14px;
+    box-shadow:var(--shadow);font-weight:500;font-size:13.5px;opacity:0;transform:translateY(20px);transition:.3s;z-index:99;pointer-events:none;max-width:340px}
+  .toast.show{opacity:1;transform:translateY(0)}
+  .toast b{color:#C99B72}
+
+  @media(max-width:1080px){
+    .cards{grid-template-columns:repeat(3,1fr)}
+    .nav__search{display:none}
+  }
+  @media(max-width:920px){
+    .slide__grid,.config__grid,.split__grid,.promo__grid,.tiles__grid{grid-template-columns:1fr}
+    .cards{grid-template-columns:repeat(2,1fr)}
+    .fabrics__grid{grid-template-columns:repeat(2,1fr)}
+    .blog__grid{grid-template-columns:1fr}
+    .trust__grid{grid-template-columns:repeat(2,1fr)}
+    .footer__grid{grid-template-columns:1fr 1fr}
+    .nav__links{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;flex-direction:column;
+      padding:18px 24px;gap:14px;box-shadow:var(--shadow)}
+    .nav__links.open{display:flex}
+    .burger{display:block}
+    .promo__img{display:none}
+    .slide__grid{min-height:auto;padding:40px 0 60px}
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">🚚 Darmowa dostawa na terenie Polski od 500 zł &nbsp;|&nbsp; <b>Rabat 10% z kodem WOOD10</b> &nbsp;|&nbsp; Ręczna produkcja — realizacja 10–14 dni</div>
+
+<header>
+  <nav class="nav">
+    <a href="#" class="nav__logo">
+      <img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084126_dffc555a-68af-4558-97aa-7ea28b0b12e8.png?v=1783759940" alt="Logo WoodTherapy">
+      <span><strong>WoodTherapy</strong><small>Maciej Michalski</small></span>
+    </a>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="#">Strona główna</a></li>
+      <li class="has-drop"><a href="#konfigurator">Katalog</a>
+        <div class="drop">
+          <a href="#konfigurator">Legowisko — Dąb</a>
+          <a href="#konfigurator">Legowisko — Orzech włoski</a>
+          <a href="#konfigurator">Legowisko — Olcha</a>
+          <a href="#tkaniny">Tkaniny poduszek</a>
+          <a href="#konfigurator">Na wymiar</a>
+        </div>
+      </li>
+      <li><a href="#o-nas">O nas</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#stopka">Kontakt</a></li>
+    </ul>
+    <div class="nav__search">
+      <input type="text" placeholder="Szukaj legowiska, tkaniny…">
+      <button onclick="toast('Wyszukiwarka dostępna w wersji Shopify 🔍')">🔍</button>
+    </div>
+    <div class="nav__icons">
+      <span class="ic" title="Konto" onclick="toast('Logowanie dostępne w wersji Shopify')">👤</span>
+      <span class="ic" title="Koszyk" onclick="toast('Twój koszyk: <b>'+cart+'</b> szt.')">🛒<span class="bubble" id="cartCount">0</span></span>
+      <button class="burger" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO SLIDESHOW -->
+<section class="hero">
+  <div class="slide active">
+    <div class="container slide__grid">
+      <div class="slide__txt">
+        <span class="kicker">🐾 Rękodzieło z litego drewna</span>
+        <h1>Czas na <span>zdrowy sen</span> Twojego psa!</h1>
+        <p>Ortopedyczne legowiska z dębu, orzecha włoskiego i olchy — ręcznie robione w Polsce, z materacem w tkaninach Davis.</p>
+        <a href="#konfigurator" class="btn">Kup teraz 🛒</a>
+        <a href="#o-nas" class="btn btn--ghost" style="margin-left:10px">Poznaj pracownię</a>
+      </div>
+      <div class="slide__img">
+        <img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/0001-4680875059753501437.jpg?v=1783760526" alt="Golden retriever w legowisku WoodTherapy">
+        <div class="sticker">już od<b>499 zł</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide">
+    <div class="container slide__grid">
+      <div class="slide__txt">
+        <span class="kicker">📏 Zamówienia na wymiar</span>
+        <h1>Nietypowy pies? <span>Nietypowe</span> legowisko!</h1>
+        <p>Zrobimy legowisko dokładnie pod wymiar Twojego psa i Twojego wnętrza. Wybierz drewno, tkaninę — resztą zajmiemy się my.</p>
+        <a href="#konfigurator" class="btn">Skonfiguruj 🐕</a>
+      </div>
+      <div class="slide__img">
+        <img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084346_735dc724-a494-4e69-bd98-ba99e831164c.png?v=1783759813" alt="Legowisko z orzecha włoskiego">
+        <div class="sticker">na<b>wymiar</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero__dots" id="heroDots"></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee__inner">
+    <span>🐾 Materac ortopedyczny</span><span>🌳 Lite drewno</span><span>🇵🇱 Ręczna produkcja w Polsce</span><span>🛋️ Tkaniny Davis</span><span>🧼 Zdejmowany pokrowiec</span><span>📏 Rozmiar na wymiar</span>
+    <span>🐾 Materac ortopedyczny</span><span>🌳 Lite drewno</span><span>🇵🇱 Ręczna produkcja w Polsce</span><span>🛋️ Tkaniny Davis</span><span>🧼 Zdejmowany pokrowiec</span><span>📏 Rozmiar na wymiar</span>
+  </div>
+</div>
+
+<!-- CATEGORY CIRCLES -->
+<section class="cats">
+  <div class="container">
+    <div class="sec-head">
+      <span class="kicker">Kategorie</span>
+      <h2>Znajdź coś dla swojego pupila</h2>
+    </div>
+    <div class="cats__grid">
+      <a href="#konfigurator" class="cat"><div class="cat__img"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084120_41f2ec0e-e29e-455b-9c37-944bbda20a2c.png?v=1783759813" alt="Dąb"></div><b>Dąb</b></a>
+      <a href="#konfigurator" class="cat"><div class="cat__img"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084346_735dc724-a494-4e69-bd98-ba99e831164c.png?v=1783759813" alt="Orzech włoski"></div><b>Orzech włoski</b></a>
+      <a href="#konfigurator" class="cat"><div class="cat__img"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084552_f5fce430-a8d7-4efe-9619-71bd61682f36.png?v=1783759812" alt="Olcha"></div><b>Olcha</b></a>
+      <a href="#tkaniny" class="cat"><div class="cat__img"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/bosco-04_BOSCO_04_f2207035-ba31-45eb-b044-08743b812001.jpg?v=1783759813" alt="Tkaniny"></div><b>Tkaniny</b></a>
+      <a href="#konfigurator" class="cat"><div class="cat__img"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/0001-4680875059753501437.jpg?v=1783760526" alt="Na wymiar"></div><b>Na wymiar</b></a>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="statement">
+  <div class="container">
+    <h2>Od litego drewna po miękkie tkaniny Davis — nasze legowiska rozpieszczają Twojego psa <em>komfortem, na jaki zasługuje</em>. 🐶</h2>
+  </div>
+</section>
+
+<!-- COUNTDOWN PROMO -->
+<section class="promo">
+  <div class="container promo__grid">
+    <div>
+      <span class="kicker">Oferta limitowana</span>
+      <h2>Rabat <b>10%</b> z kodem WOOD10</h2>
+      <p>Zgarnij 10% zniżki na pierwsze zamówienie, używając kodu WOOD10 przy kasie. Oferta znika, gdy licznik dobije do zera!</p>
+      <div class="count" id="countdown">
+        <div class="count__box"><b id="cd-d">00</b><span>dni</span></div>
+        <div class="count__box"><b id="cd-h">00</b><span>godz.</span></div>
+        <div class="count__box"><b id="cd-m">00</b><span>min.</span></div>
+        <div class="count__box"><b id="cd-s">00</b><span>sek.</span></div>
+      </div>
+      <a href="#konfigurator" class="btn">Kup teraz</a>
+    </div>
+    <div class="promo__img">
+      <img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084552_f5fce430-a8d7-4efe-9619-71bd61682f36.png?v=1783759812" alt="Legowisko z olchy">
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT TABS -->
+<section class="picks">
+  <div class="container">
+    <div class="sec-head">
+      <span class="kicker">Nasze bestsellery</span>
+      <h2>Wybierz swoje drewno</h2>
+      <p>Jedno legowisko, trzy gatunki litego drewna. Każde ręcznie szlifowane i olejowane.</p>
+    </div>
+    <div class="tabs">
+      <button class="tab active" data-pane="all">Wszystkie</button>
+      <button class="tab" data-pane="dab">Dąb</button>
+      <button class="tab" data-pane="orzech">Orzech włoski</button>
+      <button class="tab" data-pane="olcha">Olcha</button>
+    </div>
+    <div class="cards pane active" id="pane-all">
+      <div class="card">
+        <span class="card__badge">Bestseller</span>
+        <a href="#konfigurator" class="card__img"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084120_41f2ec0e-e29e-455b-9c37-944bbda20a2c.png?v=1783759813" alt="Legowisko dąb"></a>
+        <div class="card__body">
+          <div class="stars">★★★★★</div>
+          <h3>Legowisko — Dąb</h3>
+          <div class="price">Od 539 zł</div>
+          <button class="btn card__btn" onclick="quickAdd('Dąb')">Dodaj do koszyka</button>
+        </div>
+      </div>
+      <div class="card">
+        <span class="card__badge card__badge--dark">Premium</span>
+        <a href="#konfigurator" class="card__img"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084346_735dc724-a494-4e69-bd98-ba99e831164c.png?v=1783759813" alt="Legowisko orzech"></a>
+        <div class="card__body">
+          <div class="stars">★★★★★</div>
+          <h3>Legowisko — Orzech włoski</h3>
+          <div class="price">Od 599 zł</div>
+          <button class="btn card__btn" onclick="quickAdd('Orzech włoski')">Dodaj do koszyka</button>
+        </div>
+      </div>
+      <div class="card">
+        <span class="card__badge">Najlepsza cena</span>
+        <a href="#konfigurator" class="card__img"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084552_f5fce430-a8d7-4efe-9619-71bd61682f36.png?v=1783759812" alt="Legowisko olcha"></a>
+        <div class="card__body">
+          <div class="stars">★★★★★</div>
+          <h3>Legowisko — Olcha</h3>
+          <div class="price">Od 499 zł</div>
+          <button class="btn card__btn" onclick="quickAdd('Olcha')">Dodaj do koszyka</button>
+        </div>
+      </div>
+      <div class="card">
+        <span class="card__badge card__badge--dark">Na wymiar</span>
+        <a href="#konfigurator" class="card__img"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/0001-4680875059753501437.jpg?v=1783760526" alt="Legowisko na wymiar"></a>
+        <div class="card__body">
+          <div class="stars">★★★★★</div>
+          <h3>Legowisko — Na wymiar</h3>
+          <div class="price">Od 899 zł</div>
+          <button class="btn card__btn" onclick="quickAdd('Na wymiar')">Dodaj do koszyka</button>
+        </div>
+      </div>
+    </div>
+    <div class="cards pane" id="pane-dab"></div>
+    <div class="cards pane" id="pane-orzech"></div>
+    <div class="cards pane" id="pane-olcha"></div>
+  </div>
+</section>
+
+<!-- CONFIGURATOR -->
+<section class="config" id="konfigurator">
+  <div class="container config__grid">
+    <div class="gallery">
+      <div class="gallery__main">
+        <span class="gallery__badge">Bestseller 🔥</span>
+        <img id="mainImg" src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084120_41f2ec0e-e29e-455b-9c37-944bbda20a2c.png?v=1783759813" alt="Legowisko ortopedyczne WoodTherapy">
+      </div>
+      <div class="gallery__thumbs" id="thumbs">
+        <img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084120_41f2ec0e-e29e-455b-9c37-944bbda20a2c.png?v=1783759813" alt="Dąb" class="active">
+        <img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084346_735dc724-a494-4e69-bd98-ba99e831164c.png?v=1783759813" alt="Orzech włoski">
+        <img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084552_f5fce430-a8d7-4efe-9619-71bd61682f36.png?v=1783759812" alt="Olcha">
+        <img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/0001-4680875059753501437.jpg?v=1783760526" alt="Lifestyle">
+        <img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/bosco-04_BOSCO_04_f2207035-ba31-45eb-b044-08743b812001.jpg?v=1783759813" alt="Tkanina Bosco">
+        <img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/runo-56_RUNO_56_BASE.jpg?v=1783760096" alt="Tkanina Runo">
+      </div>
+    </div>
+
+    <div class="pinfo">
+      <span class="vendor">WoodTherapy · Maciej Michalski</span>
+      <h2>Ortopedyczne legowisko dla psa z litego drewna</h2>
+      <div class="stars">★★★★★ <small>4,9/5 · 87 opinii</small></div>
+      <div class="bigprice"><span id="priceVal">539</span> zł <small>z VAT · darmowa dostawa od 500 zł</small></div>
+      <div class="stock">Dostępne — produkcja na zamówienie</div>
+
+      <div class="opt">
+        <span class="opt__label">Drewno: <span id="woodLabel">Dąb</span></span>
+        <div class="chips" id="woodChips">
+          <button class="chip active" data-wood="Dąb" data-add="40" data-img="0">Dąb</button>
+          <button class="chip" data-wood="Orzech włoski" data-add="100" data-img="1">Orzech włoski</button>
+          <button class="chip" data-wood="Olcha" data-add="0" data-img="2">Olcha</button>
+        </div>
+      </div>
+
+      <div class="opt">
+        <span class="opt__label">Rozmiar: <span id="sizeLabel">Mały (60×45 cm)</span></span>
+        <div class="chips" id="sizeChips">
+          <button class="chip active" data-size="Mały (60×45 cm)" data-base="499">Mały</button>
+          <button class="chip" data-size="Średni (80×60 cm)" data-base="599">Średni</button>
+          <button class="chip" data-size="Duży (100×70 cm)" data-base="719">Duży</button>
+          <button class="chip" data-size="Na wymiar" data-base="899">Na wymiar</button>
+        </div>
+      </div>
+
+      <div class="opt">
+        <span class="opt__label">Tkanina poduszki: <span id="fabricLabel">Bosco</span></span>
+        <div class="swatches" id="fabricSwatches">
+          <div class="swatch active" data-fabric="Bosco" title="Bosco"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/bosco-04_BOSCO_04_f2207035-ba31-45eb-b044-08743b812001.jpg?v=1783759813" alt="Bosco"></div>
+          <div class="swatch" data-fabric="Vela" title="Vela"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/vela-56_VELA_56_9cacde09-5735-4f04-8073-385f8650845d.jpg?v=1783759812" alt="Vela"></div>
+          <div class="swatch" data-fabric="Gelato" title="Gelato"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/gelato-15_GELATO_15_e0addd5c-5601-4f83-95d2-d6a8f6942635.jpg?v=1783759813" alt="Gelato"></div>
+          <div class="swatch" data-fabric="Rambo" title="Rambo"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/rambo-14_RAMBO_14.jpg?v=1783760096" alt="Rambo"></div>
+          <div class="swatch" data-fabric="Caprio" title="Caprio"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/caprio-96_CAPRIO_96.jpg?v=1783759812" alt="Caprio"></div>
+          <div class="swatch" data-fabric="Monte" title="Monte"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/monte-71_MONTE_71_BASE.jpg?v=1783760096" alt="Monte"></div>
+          <div class="swatch" data-fabric="Runo" title="Runo"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/runo-56_RUNO_56_BASE.jpg?v=1783760096" alt="Runo"></div>
+          <div class="swatch" data-fabric="Sand" title="Sand"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/sand-03_SAND_03_BASE.jpg?v=1783760096" alt="Sand"></div>
+        </div>
+      </div>
+
+      <div class="buy">
+        <div class="qty">
+          <button onclick="qty(-1)">−</button>
+          <input id="qtyInput" value="1" readonly>
+          <button onclick="qty(1)">+</button>
+        </div>
+        <button class="btn" onclick="addToCart()">Dodaj do koszyka 🐾</button>
+      </div>
+      <p class="note">Rozmiar „Na wymiar”: po zakupie skontaktujemy się, aby ustalić dokładne wymiary. Realizacja 10–14 dni (standard) / 14–21 dni (na wymiar).</p>
+
+      <div class="accordion">
+        <div class="acc__item open">
+          <button class="acc__head">Opis produktu</button>
+          <div class="acc__body"><div class="acc__body-inner">
+            Ręcznie robione legowisko ortopedyczne z litego drewna. Solidna rama i gruby, zdejmowany materac z pianki wysokoelastycznej zapewniają zdrowy sen i wsparcie stawów. Poszycia z kolekcji tkanin Davis — łatwe w czyszczeniu (Easy Clean) i odporne na przetarcia (test Martindale &gt;90 000).
+          </div></div>
+        </div>
+        <div class="acc__item">
+          <button class="acc__head">Wymiary i dobór rozmiaru</button>
+          <div class="acc__body"><div class="acc__body-inner">
+            <table>
+              <tr><th>Rozmiar</th><th>Wymiary wewn.</th><th>Dla psa</th></tr>
+              <tr><td>Mały</td><td>60 × 45 cm</td><td>do 8 kg — maltańczyk, chihuahua</td></tr>
+              <tr><td>Średni</td><td>80 × 60 cm</td><td>8–20 kg — beagle, cocker spaniel</td></tr>
+              <tr><td>Duży</td><td>100 × 70 cm</td><td>20–40 kg — labrador, owczarek</td></tr>
+              <tr><td>Na wymiar</td><td>wg potrzeb</td><td>ustalimy po zakupie</td></tr>
+            </table>
+            <p style="margin-top:10px">Wskazówka: zmierz psa od nosa do nasady ogona i dodaj 15–20 cm.</p>
+          </div></div>
+        </div>
+        <div class="acc__item">
+          <button class="acc__head">Pielęgnacja</button>
+          <div class="acc__body"><div class="acc__body-inner">
+            Drewno przecieraj wilgotną ściereczką i od czasu do czasu odśwież olejem do drewna (używamy wyłącznie olejów bezpiecznych dla zwierząt). Poszycie materaca jest zdejmowane — pierz zgodnie z zaleceniami dla tkanin Davis Easy Clean.
+          </div></div>
+        </div>
+        <div class="acc__item">
+          <button class="acc__head">Dostawa i zwroty</button>
+          <div class="acc__body"><div class="acc__body-inner">
+            Darmowa dostawa kurierem na terenie Polski od 500 zł. Produkty standardowe: 14 dni na zwrot. Produkty „na wymiar” wykonywane są na indywidualne zamówienie i nie podlegają zwrotowi.
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WIDE BANNER -->
+<section class="banner">
+  <img class="bg" src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/0001-4680875059753501437.jpg?v=1783760526" alt="Pies w legowisku">
+  <div class="container">
+    <h2>Szczęście dla psów <b>i ich ludzi!</b> 🐾</h2>
+    <a href="#konfigurator" class="btn">Zamów legowisko</a>
+  </div>
+</section>
+
+<!-- ABOUT SPLIT -->
+<section class="split" id="o-nas">
+  <div class="container split__grid">
+    <div class="split__imgwrap">
+      <img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084346_735dc724-a494-4e69-bd98-ba99e831164c.png?v=1783759813" alt="Legowisko z orzecha włoskiego">
+      <div class="split__stat"><b>500+</b><span>szczęśliwych psów</span></div>
+    </div>
+    <div>
+      <span class="kicker">O pracowni</span>
+      <h2>Z miłości do drewna i do psów</h2>
+      <p>WoodTherapy to pracownia stolarska Macieja Michalskiego. Każde legowisko powstaje na zamówienie — od wyboru deski, przez ręczne szlifowanie, po olejowanie naturalnymi olejami.</p>
+      <ul>
+        <li>Lite drewno: dąb, orzech włoski, olcha</li>
+        <li>Materac ortopedyczny z pianki wysokoelastycznej</li>
+        <li>Poszycia z tkanin tapicerskich Davis Fabrics</li>
+        <li>Ręczna produkcja w Polsce 🇵🇱</li>
+      </ul>
+      <a href="#konfigurator" class="btn btn--dark">Zamów swoje legowisko</a>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section class="ba">
+  <div class="container">
+    <div class="sec-head">
+      <span class="kicker">Porównaj drewno</span>
+      <h2>Dąb czy orzech włoski?</h2>
+      <p>Przesuń suwak, aby porównać oba gatunki drewna.</p>
+    </div>
+    <div class="ba__wrap" id="baWrap">
+      <img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084120_41f2ec0e-e29e-455b-9c37-944bbda20a2c.png?v=1783759813" alt="Dąb">
+      <div class="ba__after" id="baAfter">
+        <img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084346_735dc724-a494-4e69-bd98-ba99e831164c.png?v=1783759813" alt="Orzech włoski">
+      </div>
+      <div class="ba__line" id="baLine"></div>
+      <span class="ba__tag ba__tag--l">Orzech włoski</span>
+      <span class="ba__tag ba__tag--r">Dąb</span>
+      <input class="ba__range" id="baRange" type="range" min="0" max="100" value="50">
+    </div>
+  </div>
+</section>
+
+<!-- PROMO TILES -->
+<section class="tiles">
+  <div class="container tiles__grid">
+    <div class="tile">
+      <img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084552_f5fce430-a8d7-4efe-9619-71bd61682f36.png?v=1783759812" alt="Materac ortopedyczny">
+      <div class="tile__body">
+        <h3>Materac, który dba o stawy</h3>
+        <a href="#konfigurator" class="btn">Zobacz więcej</a>
+      </div>
+    </div>
+    <div class="tile">
+      <img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/gelato-15_GELATO_15_e0addd5c-5601-4f83-95d2-d6a8f6942635.jpg?v=1783759813" alt="Tkaniny Davis">
+      <div class="tile__body">
+        <h3>Tkaniny Davis — 8 kolekcji</h3>
+        <a href="#tkaniny" class="btn">Wybierz tkaninę</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FABRICS -->
+<section class="fabrics" id="tkaniny">
+  <div class="container">
+    <div class="sec-head">
+      <span class="kicker">Kolekcje tkanin</span>
+      <h2>Wybierz tkaninę poduszki</h2>
+      <p>Poszycia szyjemy z tkanin tapicerskich Davis Fabrics — łatwych w czyszczeniu, wytrzymałych i przyjaznych zwierzętom.</p>
+    </div>
+    <div class="fabrics__grid">
+      <div class="fabric"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/bosco-04_BOSCO_04_f2207035-ba31-45eb-b044-08743b812001.jpg?v=1783759813" alt="Bosco"><h3>BOSCO</h3><p>Szenil 500 g/m² · Martindale &gt;100 000</p></div>
+      <div class="fabric"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/vela-56_VELA_56_9cacde09-5735-4f04-8073-385f8650845d.jpg?v=1783759812" alt="Vela"><h3>VELA</h3><p>Easy Clean · Water Repellent</p></div>
+      <div class="fabric"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/gelato-15_GELATO_15_e0addd5c-5601-4f83-95d2-d6a8f6942635.jpg?v=1783759813" alt="Gelato"><h3>GELATO</h3><p>410 g/m² · Martindale &gt;100 000</p></div>
+      <div class="fabric"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/rambo-14_RAMBO_14.jpg?v=1783760096" alt="Rambo"><h3>RAMBO</h3><p>Miękki melanż · odporny na pilling</p></div>
+      <div class="fabric"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/caprio-96_CAPRIO_96.jpg?v=1783759812" alt="Caprio"><h3>CAPRIO</h3><p>Strukturalna plecionka</p></div>
+      <div class="fabric"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/monte-71_MONTE_71_BASE.jpg?v=1783760096" alt="Monte"><h3>MONTE</h3><p>Easy Clean · Water Repellent</p></div>
+      <div class="fabric"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/runo-56_RUNO_56_BASE.jpg?v=1783760096" alt="Runo"><h3>RUNO</h3><p>Boucle · Easy Clean</p></div>
+      <div class="fabric"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/sand-03_SAND_03_BASE.jpg?v=1783760096" alt="Sand"><h3>SAND</h3><p>Delikatna struktura · 260 g/m²</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="blog" id="blog">
+  <div class="container">
+    <div class="sec-head">
+      <span class="kicker">Blog</span>
+      <h2>Porady i historie dla miłośników psów</h2>
+    </div>
+    <div class="blog__grid">
+      <div class="post">
+        <div class="post__img"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/0001-4680875059753501437.jpg?v=1783760526" alt="Zdrowy sen psa"></div>
+        <div class="post__body">
+          <small>Zdrowie psa · 11 lipca 2026</small>
+          <h3>Zdrowy sen psa seniora</h3>
+          <p>Starsze psy potrzebują szczególnego wsparcia stawów. Sprawdź, jak materac ortopedyczny pomaga przy dysplazji i artretyzmie…</p>
+          <a href="#" onclick="toast('Blog dostępny w wersji Shopify 📖');return false">Czytaj więcej →</a>
+        </div>
+      </div>
+      <div class="post">
+        <div class="post__img"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084120_41f2ec0e-e29e-455b-9c37-944bbda20a2c.png?v=1783759813" alt="Pielęgnacja drewna"></div>
+        <div class="post__body">
+          <small>Poradnik · 4 lipca 2026</small>
+          <h3>Jak dbać o drewno olejowane</h3>
+          <p>Lite drewno pięknieje z wiekiem — pod warunkiem właściwej pielęgnacji. Trzy proste kroki, by legowisko służyło latami…</p>
+          <a href="#" onclick="toast('Blog dostępny w wersji Shopify 📖');return false">Czytaj więcej →</a>
+        </div>
+      </div>
+      <div class="post">
+        <div class="post__img"><img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/runo-56_RUNO_56_BASE.jpg?v=1783760096" alt="Dobór tkaniny"></div>
+        <div class="post__body">
+          <small>Poradnik · 27 czerwca 2026</small>
+          <h3>Która tkanina dla psiaka?</h3>
+          <p>Linieje? Uwielbia błoto? Podpowiadamy, jak wybrać tkaninę Davis idealną dla charakteru Twojego psa…</p>
+          <a href="#" onclick="toast('Blog dostępny w wersji Shopify 📖');return false">Czytaj więcej →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="sec-head">
+      <span class="kicker">FAQ</span>
+      <h2>Najczęściej zadawane pytania</h2>
+    </div>
+    <div class="accordion">
+      <div class="acc__item"><button class="acc__head">Jak dobrać rozmiar legowiska?</button>
+        <div class="acc__body"><div class="acc__body-inner">Zmierz psa od nosa do nasady ogona i dodaj ok. 15–20 cm. Mały (60×45) — do 8 kg, Średni (80×60) — 8–20 kg, Duży (100×70) — 20–40 kg. Inny wymiar? Wybierz „Na wymiar”.</div></div></div>
+      <div class="acc__item"><button class="acc__head">Jak działa zamówienie „na wymiar”?</button>
+        <div class="acc__body"><div class="acc__body-inner">Po złożeniu zamówienia skontaktujemy się z Tobą, aby ustalić dokładne wymiary i szczegóły wykonania.</div></div></div>
+      <div class="acc__item"><button class="acc__head">Czy pokrowiec można prać?</button>
+        <div class="acc__body"><div class="acc__body-inner">Tak — poszycie materaca jest zdejmowane, a tkaniny Davis z technologią Easy Clean czyści się bardzo łatwo.</div></div></div>
+      <div class="acc__item"><button class="acc__head">Jaki jest czas realizacji?</button>
+        <div class="acc__body"><div class="acc__body-inner">Rozmiary standardowe: 10–14 dni roboczych. Na wymiar: 14–21 dni roboczych.</div></div></div>
+      <div class="acc__item"><button class="acc__head">Czy wysyłacie za granicę?</button>
+        <div class="acc__body"><div class="acc__body-inner">Obecnie realizujemy wysyłki na terenie Polski. W sprawie wysyłki zagranicznej napisz do nas.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BADGES -->
+<section class="trust">
+  <div class="container trust__grid">
+    <div class="badge"><div class="ico">🏆</div><div><h4>Gwarancja rzemiosła</h4><p>5 lat gwarancji na ramę</p></div></div>
+    <div class="badge"><div class="ico">💬</div><div><h4>Kontakt z pracownią</h4><p>Doradzimy przy każdym zamówieniu</p></div></div>
+    <div class="badge"><div class="ico">🚚</div><div><h4>Darmowa dostawa</h4><p>Od 500 zł na terenie Polski</p></div></div>
+    <div class="badge"><div class="ico">↩️</div><div><h4>Łatwe zwroty</h4><p>14 dni na zwrot (rozmiary standardowe)</p></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="stopka">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="https://cdn.shopify.com/s/files/1/0947/5479/9997/files/hf_20260711_084126_dffc555a-68af-4558-97aa-7ea28b0b12e8.png?v=1783759940" alt="Logo WoodTherapy">
+        <p>WoodTherapy — pracownia stolarska Macieja Michalskiego. Ortopedyczne legowiska dla psów z litego drewna, ręcznie robione w Polsce.</p>
+      </div>
+      <div>
+        <h5>Informacje</h5>
+        <ul>
+          <li><a href="#o-nas">O nas</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#konfigurator">Sklep</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Szybkie linki</h5>
+        <ul>
+          <li><a href="#konfigurator">Legowisko — Dąb</a></li>
+          <li><a href="#konfigurator">Legowisko — Orzech</a></li>
+          <li><a href="#konfigurator">Legowisko — Olcha</a></li>
+          <li><a href="#tkaniny">Tkaniny Davis</a></li>
+          <li><a href="#konfigurator">Na wymiar</a></li>
+        </ul>
+      </div>
+      <div class="footer__news">
+        <h5>Zapisz się po psie okazje 🐾</h5>
+        <p>Porady, nowe tkaniny i oferty specjalne prosto na Twoją skrzynkę!</p>
+        <form onsubmit="event.preventDefault();toast('Dziękujemy! Sprawdź skrzynkę 📬');this.reset()">
+          <input type="email" required placeholder="Adres e-mail">
+          <button type="submit">Zapisz się</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 WoodTherapy — Maciej Michalski. Wszelkie prawa zastrzeżone.</span>
+      <span>
+        <a href="#">Regulamin</a>
+        <a href="#">Polityka prywatności</a>
+        <a href="#">Zwroty</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  /* ===== State ===== */
+  const state = { wood:'Dąb', add:40, size:'Mały (60×45 cm)', base:499, fabric:'Bosco', qty:1 };
+  let cart = 0;
+
+  /* ===== Toast ===== */
+  function toast(msg){
+    const t = document.getElementById('toast');
+    t.innerHTML = msg;
+    t.classList.add('show');
+    clearTimeout(t._h);
+    t._h = setTimeout(()=>t.classList.remove('show'), 3200);
+  }
+
+  /* ===== Hero slideshow ===== */
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dotsWrap = document.getElementById('heroDots');
+  let cur = 0, heroTimer;
+  slides.forEach((_,i)=>{
+    const d=document.createElement('button');
+    if(i===0)d.classList.add('active');
+    d.addEventListener('click',()=>{go(i);restart();});
+    dotsWrap.appendChild(d);
+  });
+  const dots = Array.from(dotsWrap.children);
+  function go(i){
+    slides[cur].classList.remove('active');dots[cur].classList.remove('active');
+    cur=i;
+    slides[cur].classList.add('active');dots[cur].classList.add('active');
+  }
+  function restart(){clearInterval(heroTimer);heroTimer=setInterval(()=>go((cur+1)%slides.length),6000);}
+  restart();
+
+  /* ===== Countdown (7 dni od wejścia) ===== */
+  const target = Date.now() + 7*24*60*60*1000;
+  function tick(){
+    let diff = Math.max(0, target - Date.now());
+    const d=Math.floor(diff/86400000);diff%=86400000;
+    const h=Math.floor(diff/3600000);diff%=3600000;
+    const m=Math.floor(diff/60000);diff%=60000;
+    const s=Math.floor(diff/1000);
+    const pad=n=>String(n).padStart(2,'0');
+    document.getElementById('cd-d').textContent=pad(d);
+    document.getElementById('cd-h').textContent=pad(h);
+    document.getElementById('cd-m').textContent=pad(m);
+    document.getElementById('cd-s').textContent=pad(s);
+  }
+  tick();setInterval(tick,1000);
+
+  /* ===== Product tabs ===== */
+  const paneAll = document.getElementById('pane-all');
+  const woodOfCard = ['dab','orzech','olcha','wymiar'];
+  document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    const key=t.dataset.pane;
+    const cards=Array.from(paneAll.children);
+    cards.forEach((c,i)=>{
+      c.style.display = (key==='all' || woodOfCard[i]===key) ? '' : 'none';
+    });
+  }));
+
+  /* ===== Quick add ===== */
+  function quickAdd(wood){
+    cart++;
+    document.getElementById('cartCount').textContent=cart;
+    toast('Dodano do koszyka: <b>Legowisko — '+wood+'</b> 🛒');
+  }
+
+  /* ===== Gallery ===== */
+  const galleryImgs = Array.from(document.querySelectorAll('#thumbs img'));
+  const mainImg = document.getElementById('mainImg');
+  function setMain(i){
+    mainImg.src = galleryImgs[i].src;
+    galleryImgs.forEach(t=>t.classList.remove('active'));
+    galleryImgs[i].classList.add('active');
+  }
+  galleryImgs.forEach((t,i)=>t.addEventListener('click',()=>setMain(i)));
+
+  /* ===== Configurator ===== */
+  function renderPrice(){
+    document.getElementById('priceVal').textContent = (state.base + state.add) * state.qty;
+  }
+  document.querySelectorAll('#woodChips .chip').forEach(c=>c.addEventListener('click',()=>{
+    document.querySelectorAll('#woodChips .chip').forEach(x=>x.classList.remove('active'));
+    c.classList.add('active');
+    state.wood=c.dataset.wood;state.add=+c.dataset.add;
+    document.getElementById('woodLabel').textContent=state.wood;
+    setMain(+c.dataset.img);
+    renderPrice();
+  }));
+  document.querySelectorAll('#sizeChips .chip').forEach(c=>c.addEventListener('click',()=>{
+    document.querySelectorAll('#sizeChips .chip').forEach(x=>x.classList.remove('active'));
+    c.classList.add('active');
+    state.size=c.dataset.size;state.base=+c.dataset.base;
+    document.getElementById('sizeLabel').textContent=state.size;
+    renderPrice();
+  }));
+  document.querySelectorAll('.swatch').forEach(s=>s.addEventListener('click',()=>{
+    document.querySelectorAll('.swatch').forEach(x=>x.classList.remove('active'));
+    s.classList.add('active');
+    state.fabric=s.dataset.fabric;
+    document.getElementById('fabricLabel').textContent=state.fabric;
+  }));
+  function qty(d){
+    state.qty=Math.max(1,state.qty+d);
+    document.getElementById('qtyInput').value=state.qty;
+    renderPrice();
+  }
+  function addToCart(){
+    cart+=state.qty;
+    document.getElementById('cartCount').textContent=cart;
+    toast('Dodano: <b>'+state.wood+' · '+state.size+' · '+state.fabric+'</b> × '+state.qty+' 🛒');
+  }
+
+  /* ===== Before / After ===== */
+  const baRange=document.getElementById('baRange');
+  const baAfter=document.getElementById('baAfter');
+  const baLine=document.getElementById('baLine');
+  baRange.addEventListener('input',()=>{
+    baAfter.style.width=baRange.value+'%';
+    baLine.style.left=baRange.value+'%';
+  });
+
+  /* ===== Accordions ===== */
+  document.querySelectorAll('.acc__head').forEach(h=>h.addEventListener('click',()=>{
+    const item=h.parentElement;
+    const body=item.querySelector('.acc__body');
+    const open=item.classList.toggle('open');
+    body.style.maxHeight=open?body.scrollHeight+'px':0;
+  }));
+  document.querySelectorAll('.acc__item.open .acc__body').forEach(b=>b.style.maxHeight=b.scrollHeight+'px');
+
+  renderPrice();
+</script>
+</body>
+</html>
